@@ -1,28 +1,37 @@
-from prog.exceptions import EnemyDown, GameOver
+from prog.exceptions import EnemyDown, GameOver, WrongInput
 from prog.models import Player, Enemy
 
 
-def start_game(foe, player, level):
+def start_game(foe, player, level, is_attack):
     while True:
         try:
-            player.attack(foe)
+            if is_attack:
+                player.attack(foe)
+                is_attack = False
+            else:
+                pass
         except EnemyDown:
             player.score += 5
             level += 1
             foe = Enemy(level=level)
             print('You Win! Level up.')
-        player.defence(foe)
+        except WrongInput:
+            print('incorrect value')
+            continue
+        try:
+            player.defence(foe)
+            is_attack = True
+        except WrongInput:
+            print('incorrect value')
+            pass
 
 
 def help_me():
     file = open('requirements.txt', 'r')
-    for line in file:
+    commands = file.readlines()
+    for line in commands[1:]:
         print(line[:-1])
     file.close()
-
-
-def exit_game(player):
-    raise GameOver(player)
 
 
 def show_scores():
@@ -38,9 +47,9 @@ def play():
     level = 1
     foe = Enemy(level=level)
     # mess = input(f'Hi, {player.name}, what do you want? \n')
-    comands = {'start': lambda: start_game(foe, player, level),
+    comands = {'start': lambda: start_game(foe, player, level, True),
                'help': lambda: help_me(),
-               'exit': lambda: exit_game(player),
+               'exit': lambda: player.exit_game(),
                'show scores': lambda: show_scores(),
             }
     while True:
