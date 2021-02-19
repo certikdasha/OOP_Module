@@ -1,8 +1,17 @@
+'''
+запуск игры
+'''
 from prog.exceptions import EnemyDown, GameOver, WrongInput
 from prog.models import Player, Enemy
 
 
 def start_game(foe, player, level, is_attack):
+    '''
+    :param foe: обьект противника
+    :param player: обьект игрока
+    :param level: уровень
+    :param is_attack: определение атака/защита
+    '''
     while True:
         try:
             if is_attack:
@@ -23,11 +32,13 @@ def start_game(foe, player, level, is_attack):
             is_attack = True
         except WrongInput:
             print('incorrect value')
-            pass
 
 
 def help_me():
-    file = open('settings.txt.txt', 'r')
+    '''
+    output to the user possible commands
+    '''
+    file = open('settings.txt', 'r')
     commands = file.readlines()
     for line in commands[1:]:
         print(line[:-1])
@@ -35,6 +46,9 @@ def help_me():
 
 
 def show_scores():
+    '''
+    output to the user of the top-10 players
+    '''
     file = open('scores.txt', 'r')
     for line in file:
         print(line[:-1])
@@ -42,30 +56,29 @@ def show_scores():
 
 
 def play():
+    '''
+    game functionality
+    '''
     user_name = input('Enter your name: ')
     player = Player(name=user_name)
     level = 1
     foe = Enemy(level=level)
-    # mess = input(f'Hi, {player.name}, what do you want? \n')
     comands = {'start': lambda: start_game(foe, player, level, True),
-               'help': lambda: help_me(),
-               'exit': lambda: player.exit_game(),
-               'show scores': lambda: show_scores(),
+               'help': help_me,
+               'exit': player.exit_game,
+               'show scores': show_scores,
             }
     while True:
-        a = input()
-        comands[a]()
+        enter = input()
+        comands[enter]()
 
 
 if __name__ == '__main__':
     try:
         play()
-    except GameOver as e:
-        print(f'Game Over!')
+    except GameOver as element:
+        print('Game Over!')
     except KeyboardInterrupt:
         pass
     finally:
         print('Good bye!')
-
-
-
