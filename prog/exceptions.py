@@ -1,4 +1,7 @@
 class GameOver(Exception):
+    '''
+    end game
+    '''
 
     def __init__(self, player):
         self.player = player
@@ -6,6 +9,9 @@ class GameOver(Exception):
         print(f'Your score: {player.score}.')
 
     def scores_write(self):
+        '''
+        запись счета
+        '''
         file = open('scores.txt', 'a')
         file.writelines(f"{self.player.name}: {self.player.score} \n")
         file.close()
@@ -13,6 +19,9 @@ class GameOver(Exception):
 
     @staticmethod
     def score_sort():
+        '''
+        сортировка топ-10
+        '''
         file = open('scores.txt', 'r')
         lines = file.readlines()
         file.close()
