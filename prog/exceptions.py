@@ -1,6 +1,3 @@
-# from prog.models import Player
-
-
 class GameOver(Exception):
 
     def __init__(self, player):
@@ -31,4 +28,8 @@ class GameOver(Exception):
 
 
 class EnemyDown(Exception):
+    pass
+
+
+class WrongInput(ValueError):
     pass

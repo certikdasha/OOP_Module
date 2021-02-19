@@ -7,4 +7,4 @@ qwer: 11
 qwerty: 9 
 Daria: 7 
 dd: 7 
-d: 6 
+da: 7 
