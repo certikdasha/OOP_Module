@@ -1,5 +1,0 @@
-life = 3
-help - show possible commands
-start - start to play
-show_scores - show best players
-exit - ending the game

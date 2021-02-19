@@ -27,7 +27,7 @@ def start_game(foe, player, level, is_attack):
 
 
 def help_me():
-    file = open('requirements.txt', 'r')
+    file = open('settings.txt.txt', 'r')
     commands = file.readlines()
     for line in commands[1:]:
         print(line[:-1])

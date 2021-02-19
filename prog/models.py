@@ -1,5 +1,4 @@
 from random import randint
-from enum import IntEnum
 from .exceptions import EnemyDown, GameOver, WrongInput
 
 
@@ -28,7 +27,7 @@ class Player(object):
 
     @staticmethod
     def live():
-        setting = open('requirements.txt', 'r')
+        setting = open('settings.txt', 'r')
         num = setting.readline().split()
         setting.close()
         return int(num[-1])
@@ -85,7 +84,7 @@ class Player(object):
         raise GameOver(self)
 
 
-class Attack(IntEnum):
-    wizard = 1
-    warrior = 2
-    rogue = 3
+# class Attack(IntEnum):
+#     wizard = 1
+#     warrior = 2
+#     rogue = 3
